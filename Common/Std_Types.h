@@ -11,13 +11,15 @@ typedef unsigned char uint8;
 typedef unsigned short int uint16;
 typedef unsigned long int uint32;
 
+typedef volatile uint32 *IO_REG_PTR;
+
 typedef uint8 Std_ReturnType;
 
 #define NULL_PTR ((void *)0) // TODO Correct this
 
-#define E_OK 0
-#define E_NOT_OK 1
-#define E_WRONG_CONFIG 2
+#define E_OK ((Std_ReturnType)0)
+#define E_NOT_OK ((Std_ReturnType)1)
+#define E_WRONG_CONFIG ((Std_ReturnType)2)
 
 #endif
 

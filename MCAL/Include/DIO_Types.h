@@ -2,20 +2,20 @@
 
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
- *         File:  Gpt_Types.h
- *       Module:  Gpt
+ *         File:  DIO.h
+ *       Module:  DIO
  *
- *  Description:  GPT Driver Types defintions
+ *  Description:  DIO Driver header file
  *
  *********************************************************************************************************************/
-#ifndef GPT_TYPES_H
-#define GPT_TYPES_H
+#ifndef DIO_TYPES_H
+#define DIO_TYPES_H
 
 /**********************************************************************************************************************
  * INCLUDES
  *********************************************************************************************************************/
 #include "Std_Types.h"
-#include "Gpt_Registers.h"
+
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
@@ -27,44 +27,10 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
-
-typedef uint32 Gpt_ChannelType;
-typedef uint32 Gpt_ValueType;
-
-typedef enum
-{
-    GPT_PREDEF_TIMER_1US_16BIT,
-    GPT_PREDEF_TIMER_1US_24BIT,
-    GPT_PREDEF_TIMER_1US_32BIT,
-    GPT_PREDEF_TIMER_100US_32BIT
-} Gpt_PredefTimerType;
-
-typedef enum
-{
-    GPT_PREDEF_TIMER_1US_16BIT_ENABLE,
-    GPT_PREDEF_TIMER_1US_16BIT_DISABLE,
-    GPT_PREDEF_TIMER_1US_24BIT_ENABLE,
-    GPT_PREDEF_TIMER_1US_24BIT_DISABLE,
-    GPT_PREDEF_TIMER_1US_32BIT_ENABLE,
-    GPT_PREDEF_TIMER_1US_32BIT_DISABLE,
-    GPT_PREDEF_TIMER_100US_32BIT_ENABLE,
-    GPT_PREDEF_TIMER_100US_32BIT_DISABLE
-} Gpt_PredefTimerType_x;
-
-typedef enum
-{
-    GPT_CH_MODE_CONTINUOUS =0,
-    GPT_CH_MODE_ONESHOT
-} Gpt_ModeType;
-
-typedef struct
-{
-    Gpt_ChannelType GptChannelId;
-    Gpt_ValueType GptChannelTickFrequency;
-    Gpt_ValueType GptChannelTickValueMax;
-    Gpt_ModeType GptChannelMode;
-    void (*GptNotification)(void);
-} Gpt_ConfigType;
+typedef uint8 Dio_ChannelType;
+typedef IO_REG_PTR Dio_PortType;
+typedef uint8 Dio_LevelType;     // 0 or 1
+typedef uint8 Dio_PortLevelType; // Range 0-255
 
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES
@@ -74,8 +40,8 @@ typedef struct
  *  GLOBAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
 
-#endif /* GPT_TYPES_H */
+#endif /* DIO_TYPES_H */
 
 /**********************************************************************************************************************
- *  END OF FILE: GPT_Types.h
+ *  END OF FILE: DIO_Types.h
  *********************************************************************************************************************/

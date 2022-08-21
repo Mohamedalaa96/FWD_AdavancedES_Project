@@ -1,7 +1,7 @@
 /**********************************************************************************************************************
  *  FILE DESCRIPTION
  *  -----------------------------------------------------------------------------------------------------------------*/
-/**        \file  FileName.c
+/**        \file  Dio.c
  *        \brief
  *
  *      \details
@@ -13,6 +13,9 @@
  *  INCLUDES
  *********************************************************************************************************************/
 #include "Std_Types.h"
+#include "Port_Types.h"
+#include "GPIO_Registers.h"
+#include "Port.h"
 
 /**********************************************************************************************************************
  *  LOCAL MACROS CONSTANT\FUNCTION
@@ -49,8 +52,54 @@
  * \Return value:   : Std_ReturnType  E_OK
  *                                    E_NOT_OK
  *******************************************************************************/
-Std_ReturnType FunctionName(AnyType parameterName)
+void Port_init(const Port_ConfigType *ConfigPtr)
 {
+    IO_REG_PTR DioPort = 0;
+    uint8 PinNumber = 0;
+    // Channel A
+    if (ConfigPtr->PortPinNumber < 8)
+    {
+        DioPort = GPIO_PORT_A_BASE;
+    }
+
+    // Channel B
+    else if (ConfigPtr->PortPinNumber < 16)
+    {
+        DioPort = GPIO_PORT_B_BASE;
+        PinNumber = ConfigPtr->PortPinNumber - 8;
+    }
+
+    // Channel C
+    else if (ConfigPtr->PortPinNumber < 24)
+    {
+        DioPort = GPIO_PORT_C_BASE;
+        PinNumber = ConfigPtr->PortPinNumber - 16;
+    }
+
+    // Channel D
+    else if (ConfigPtr->PortPinNumber < 32)
+    {
+        DioPort = GPIO_PORT_D_BASE;
+        PinNumber = ConfigPtr->PortPinNumber - 24;
+    }
+
+    // Channel E
+    else if (ConfigPtr->PortPinNumber < 40)
+    {
+        DioPort = GPIO_PORT_E_BASE;
+        PinNumber = ConfigPtr->PortPinNumber - 32;
+    }
+
+    // Channel F
+    else if (ConfigPtr->PortPinNumber < 48)
+    {
+        DioPort = GPIO_PORT_F_BASE;
+        PinNumber = ConfigPtr->PortPinNumber - 40;
+    }
+
+    GPIO_BIT_ACCESS(DioPort, GPIODIR_OFFSET, PinNumber) = ConfigPtr->PortPinDirection;
+    ConfigPtr->PortPinInternalAttach
+    ConfigPtr->
 }
 
 /**********************************************************************************************************************

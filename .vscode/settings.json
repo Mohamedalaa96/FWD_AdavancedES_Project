@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "std_types.h": "c",
+        "dio.h": "c",
+        "dio_types.h": "c",
+        "port_types.h": "c"
+    }
+}

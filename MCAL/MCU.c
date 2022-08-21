@@ -1,81 +1,79 @@
 /**********************************************************************************************************************
-
  *  FILE DESCRIPTION
- *  -------------------------------------------------------------------------------------------------------------------
- *         File:  Gpt_Types.h
- *       Module:  Gpt
+ *  -----------------------------------------------------------------------------------------------------------------*/
+/**        \file  MCU.c
+ *        \brief Static Code implementation of MCU Driver
  *
- *  Description:  GPT Driver Types defintions
+ *      \details
+ *
  *
  *********************************************************************************************************************/
-#ifndef GPT_TYPES_H
-#define GPT_TYPES_H
 
 /**********************************************************************************************************************
- * INCLUDES
+ *  INCLUDES
  *********************************************************************************************************************/
 #include "Std_Types.h"
-#include "Gpt_Registers.h"
+#include "MCU_Registers.h"
+#include "MCU.h"
+
 /**********************************************************************************************************************
- *  GLOBAL CONSTANT MACROS
+ *  LOCAL MACROS CONSTANT\FUNCTION
  *********************************************************************************************************************/
 
 /**********************************************************************************************************************
- *  GLOBAL FUNCTION MACROS
+ *  LOCAL DATA
  *********************************************************************************************************************/
 
 /**********************************************************************************************************************
- *  GLOBAL DATA TYPES AND STRUCTURES
+ *  GLOBAL DATA
  *********************************************************************************************************************/
 
-typedef uint32 Gpt_ChannelType;
-typedef uint32 Gpt_ValueType;
+/**********************************************************************************************************************
+ *  LOCAL FUNCTION PROTOTYPES
+ *********************************************************************************************************************/
 
-typedef enum
+/**********************************************************************************************************************
+ *  LOCAL FUNCTIONS
+ *********************************************************************************************************************/
+
+/**********************************************************************************************************************
+ *  GLOBAL FUNCTIONS
+ *********************************************************************************************************************/
+
+/******************************************************************************
+ * \Syntax          : Std_ReturnType Gpt_Init(const Gpt_ConfigType *ConfigPtr)
+ * \Description     : Initialize the timer and its hardware parameters from ConfigPtr, and start predefined timers
+ *
+ * \Sync\Async      : Synchronous
+ * \Reentrancy      : Reentrant
+ * \Parameters (in) : *ConfigPtr   pointer to configuration struct of the type Gpt_ConfigType
+ * \Parameters (out): None
+ * \Return value:   : Std_ReturnType  E_OK
+ *                                    E_NOT_OK
+ *******************************************************************************/
+void MCU_Init(const MCU_ConfigType *ConfigPtr)
 {
-    GPT_PREDEF_TIMER_1US_16BIT,
-    GPT_PREDEF_TIMER_1US_24BIT,
-    GPT_PREDEF_TIMER_1US_32BIT,
-    GPT_PREDEF_TIMER_100US_32BIT
-} Gpt_PredefTimerType;
+    MCU_BIT_ACCESS;
+}
 
-typedef enum
+MCU_RawResetType MCU_GetResetRawValue(void)
 {
-    GPT_PREDEF_TIMER_1US_16BIT_ENABLE,
-    GPT_PREDEF_TIMER_1US_16BIT_DISABLE,
-    GPT_PREDEF_TIMER_1US_24BIT_ENABLE,
-    GPT_PREDEF_TIMER_1US_24BIT_DISABLE,
-    GPT_PREDEF_TIMER_1US_32BIT_ENABLE,
-    GPT_PREDEF_TIMER_1US_32BIT_DISABLE,
-    GPT_PREDEF_TIMER_100US_32BIT_ENABLE,
-    GPT_PREDEF_TIMER_100US_32BIT_DISABLE
-} Gpt_PredefTimerType_x;
-
-typedef enum
+    return (*(MCU_BASE_ADDRESS + RESC_OFFSET));
+}
+void MCU_PerformReset(void)
 {
-    GPT_CH_MODE_CONTINUOUS =0,
-    GPT_CH_MODE_ONESHOT
-} Gpt_ModeType;
-
-typedef struct
+}
+Std_ReturnType MCU_InitClock(MCU_ClockType ClockSetting)
 {
-    Gpt_ChannelType GptChannelId;
-    Gpt_ValueType GptChannelTickFrequency;
-    Gpt_ValueType GptChannelTickValueMax;
-    Gpt_ModeType GptChannelMode;
-    void (*GptNotification)(void);
-} Gpt_ConfigType;
+    (*(MCU_BASE_ADDRESS + RCC_OFFSET)) = 0x15 << 6; // 16Mhz
+}
+Std_ReturnType MCU_DistributePllClock(void)
+{
+}
+MCU_PllStatusType MCU_GetPllStatus(void)
+{
+}
 
 /**********************************************************************************************************************
- *  GLOBAL DATA PROTOTYPES
- *********************************************************************************************************************/
-
-/**********************************************************************************************************************
- *  GLOBAL FUNCTION PROTOTYPES
- *********************************************************************************************************************/
-
-#endif /* GPT_TYPES_H */
-
-/**********************************************************************************************************************
- *  END OF FILE: GPT_Types.h
+ *  END OF FILE: MCU.c
  *********************************************************************************************************************/
