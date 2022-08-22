@@ -15,7 +15,7 @@ typedef volatile uint32 *IO_REG_PTR;
 
 typedef uint8 Std_ReturnType;
 
-#define NULL_PTR ((void *)0) // TODO Correct this
+#define NULL_PTR ((void *)0) 
 
 #define E_OK ((Std_ReturnType)0)
 #define E_NOT_OK ((Std_ReturnType)1)
@@ -23,4 +23,5 @@ typedef uint8 Std_ReturnType;
 
 #endif
 
-// TODO: change this file to std .h file structure
+/* TODO: change this file to std .h file structure */
+

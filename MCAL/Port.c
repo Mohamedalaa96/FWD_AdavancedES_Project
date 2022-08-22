@@ -13,6 +13,7 @@
  *  INCLUDES
  *********************************************************************************************************************/
 #include "Std_Types.h"
+#include "Bit_Math.h"
 #include "Port_Types.h"
 #include "GPIO_Registers.h"
 #include "Port.h"
@@ -52,31 +53,31 @@
  * \Return value:   : Std_ReturnType  E_OK
  *                                    E_NOT_OK
  *******************************************************************************/
-void Port_init(const Port_ConfigType *ConfigPtr)
+void Port_Init(const Port_ConfigType *ConfigPtr)
 {
-    IO_REG_PTR DioPort = 0;
+    uint32 DioPort = 0;
     uint8 PinNumber = 0;
-    // Channel A
+    /* Channel A */
     if (ConfigPtr->PortPinNumber < 8)
     {
         DioPort = GPIO_PORT_A_BASE;
     }
 
-    // Channel B
+    /* Channel B */
     else if (ConfigPtr->PortPinNumber < 16)
     {
         DioPort = GPIO_PORT_B_BASE;
         PinNumber = ConfigPtr->PortPinNumber - 8;
     }
 
-    // Channel C
+    /* Channel C */
     else if (ConfigPtr->PortPinNumber < 24)
     {
         DioPort = GPIO_PORT_C_BASE;
         PinNumber = ConfigPtr->PortPinNumber - 16;
     }
 
-    // Channel D
+    /*  Channel D */
     else if (ConfigPtr->PortPinNumber < 32)
     {
         DioPort = GPIO_PORT_D_BASE;
@@ -98,8 +99,8 @@ void Port_init(const Port_ConfigType *ConfigPtr)
     }
 
     GPIO_BIT_ACCESS(DioPort, GPIODIR_OFFSET, PinNumber) = ConfigPtr->PortPinDirection;
-    ConfigPtr->PortPinInternalAttach
-    ConfigPtr->
+    //     ConfigPtr->PortPinInternalAttach
+    //     ConfigPtr->
 }
 
 /**********************************************************************************************************************
