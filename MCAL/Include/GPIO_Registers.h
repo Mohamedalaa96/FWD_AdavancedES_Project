@@ -2,10 +2,10 @@
 
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
- *         File:  MCU_Registers.h
- *       Module:  MCU
+ *         File:  GPIO_Registers.h
+ *       Module:  GPIO
  *
- *  Description:  MCU Driver Registers file
+ *  Description:  GPIO Registers file
  *
  *********************************************************************************************************************/
 #ifndef GPIO_REGISTERS_H
@@ -20,12 +20,12 @@
  *********************************************************************************************************************/
 #define PERIPHERALS_ALIAS_START 0x42000000
 
-#define GPIO_PORT_A_BASE (0x40004000)
-#define GPIO_PORT_B_BASE (0x40005000)
-#define GPIO_PORT_C_BASE (0x40006000)
-#define GPIO_PORT_D_BASE (0x40007000)
-#define GPIO_PORT_E_BASE (0x40024000)
-#define GPIO_PORT_F_BASE (0x40025000)
+#define GPIO_PORT_A_BASE ((uint32)0x40004000)
+#define GPIO_PORT_B_BASE ((uint32)0x40005000)
+#define GPIO_PORT_C_BASE ((uint32)0x40006000)
+#define GPIO_PORT_D_BASE ((uint32)0x40007000)
+#define GPIO_PORT_E_BASE ((uint32)0x40024000)
+#define GPIO_PORT_F_BASE ((uint32)0x40025000)
 
 /* using bit banding */
 #define GPIODATA_OFFSET (0x3FC)   /* 0x00 due to in simulation p. 654 bit masking  RW 0x0000.0000 GPIO Data 662*/
@@ -69,8 +69,8 @@
  *  GLOBAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
 
-#endif /* GPT_REGISTERS_H */
+#endif /* GPIO_REGISTERS_H */
 
 /**********************************************************************************************************************
- *  END OF FILE: Gpt_Registers.h
+ *  END OF FILE: GPIO_Registers.h
  *********************************************************************************************************************/

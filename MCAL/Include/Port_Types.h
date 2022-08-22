@@ -30,7 +30,7 @@
 typedef uint8 Port_PinType;               //
 typedef uint8 Port_PinLevelType;          // Inital Value
 typedef uint8 Port_DirectionType;         // input output
-typedef uint8 Port_PinModeType;           // any AF or Dio
+typedef uint8 Port_PinModeType;           // any AF or DIO
 typedef uint8 Port_PinInternalAttachType; // PU- PD- OD
 typedef uint8 Port_PinOutputCurrentType;  // 2mA,4mA,8mA
 

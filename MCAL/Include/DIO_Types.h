@@ -27,10 +27,10 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
-typedef uint8 Dio_ChannelType;
-typedef IO_REG_PTR Dio_PortType;
-typedef uint8 Dio_LevelType;     // 0 or 1
-typedef uint8 Dio_PortLevelType; // Range 0-255
+typedef uint8 DIO_ChannelType;
+typedef uint32 DIO_PortType;
+typedef uint8 DIO_LevelType;     // 0 or 1
+typedef uint8 DIO_PortLevelType; // Range 0-255
 
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES

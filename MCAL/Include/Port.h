@@ -103,14 +103,6 @@
 #define PORT_PIN_4MA ((Port_PinOutputCurrentType)1)
 #define PORT_PIN_8MA ((Port_PinOutputCurrentType)2)
 
-/* PORTs Selection*/
-#define PORT_PORTA ((Dio_PortType)GPIO_PORT_A_BASE)
-#define PORT_PORTB ((Dio_PortType)GPIO_PORT_B_BASE)
-#define PORT_PORTC ((Dio_PortType)GPIO_PORT_C_BASE)
-#define PORT_PORTD ((Dio_PortType)GPIO_PORT_D_BASE)
-#define PORT_PORTE ((Dio_PortType)GPIO_PORT_E_BASE)
-#define PORT_PORTF ((Dio_PortType)GPIO_PORT_F_BASE)
-
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
  *********************************************************************************************************************/

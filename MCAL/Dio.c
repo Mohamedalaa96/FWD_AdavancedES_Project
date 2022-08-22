@@ -1,30 +1,19 @@
 /**********************************************************************************************************************
  *  FILE DESCRIPTION
  *  -----------------------------------------------------------------------------------------------------------------*/
-/**        \file  Dio.c
+/**        \file  DIO.c
  *        \brief
  *
  *      \details
  *
  *
  *********************************************************************************************************************/
-// GPIOIM->interrupt mask;
-// GPIOnnnn->Clear interrupt;
-//  AFSEL Alternative function selection (DIO or AF)
-// PORT control GPIO_CTL -> control the alternative function for the gpio selcted via AFSEL
-// GPIODATA, GPIODIR important now, DigitalENable (Pad control), select the current
-// GPIOCR Commit control is a register to protect the write on (D7,F0 locked by default)
-// Task
-// DIO driver
-/*
-
----------------
 
 /**********************************************************************************************************************
  *  INCLUDES
  *********************************************************************************************************************/
 #include "Std_Types.h"
-#include "Dio.h"
+#include "DIO.h"
 #include "GPIO_Registers.h"
 /**********************************************************************************************************************
  *  LOCAL MACROS CONSTANT\FUNCTION
@@ -61,95 +50,95 @@
  * \Return value:   : Std_ReturnType  E_OK
  *                                    E_NOT_OK
  *******************************************************************************/
-Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId)
+DIO_LevelType DIO_ReadChannel(DIO_ChannelType ChannelId)
 {
-    IO_REG_PTR DioPort = 0;
+    uint32 DIOPort = 0;
     uint8 PinNumber = 0;
     // Channel A
     if (ChannelId < 8)
     {
-        DioPort = GPIO_PORT_A_BASE;
+        DIOPort = GPIO_PORT_A_BASE;
     }
 
     // Channel B
     else if (ChannelId < 16)
     {
-        DioPort = GPIO_PORT_A_BASE;
+        DIOPort = GPIO_PORT_A_BASE;
         PinNumber = ChannelId - 8;
     }
 
     // Channel C
     else if (ChannelId < 24)
     {
-        DioPort = GPIO_PORT_B_BASE;
+        DIOPort = GPIO_PORT_B_BASE;
         PinNumber = ChannelId - 16;
     }
 
     // Channel D
     else if (ChannelId < 32)
     {
-        DioPort = GPIO_PORT_C_BASE;
+        DIOPort = GPIO_PORT_C_BASE;
         PinNumber = ChannelId - 24;
     }
 
     // Channel E
     else if (ChannelId < 40)
     {
-        DioPort = GPIO_PORT_D_BASE;
+        DIOPort = GPIO_PORT_D_BASE;
         PinNumber = ChannelId - 32;
     }
 
     // Channel F
     else if (ChannelId < 48)
     {
-        DioPort = GPIO_PORT_F_BASE;
+        DIOPort = GPIO_PORT_F_BASE;
         PinNumber = ChannelId - 40;
     }
 
-    return ((Dio_LevelType)GPIO_BIT_ACCESS(DioPort, GPIODATA_OFFSET, PinNumber));
+    return ((DIO_LevelType)GPIO_BIT_ACCESS(DIOPort, GPIODATA_OFFSET, PinNumber));
 }
-Std_ReturnType Dio_WriteChannel(Dio_ChannelType ChannelId, Dio_LevelType Level)
+Std_ReturnType DIO_WriteChannel(DIO_ChannelType ChannelId, DIO_LevelType Level)
 {
-    IO_REG_PTR DioPort = 0;
+    uint32 DIOPort = 0;
     uint8 PinNumber = 0;
     // Channel A
     if (ChannelId < 8)
     {
-        DioPort = GPIO_PORT_A_BASE;
+        DIOPort = GPIO_PORT_A_BASE;
     }
 
     // Channel B
     else if (ChannelId < 16)
     {
-        DioPort = GPIO_PORT_B_BASE;
+        DIOPort = GPIO_PORT_B_BASE;
         PinNumber = ChannelId - 8;
     }
 
     // Channel C
     else if (ChannelId < 24)
     {
-        DioPort = GPIO_PORT_C_BASE;
+        DIOPort = GPIO_PORT_C_BASE;
         PinNumber = ChannelId - 16;
     }
 
     // Channel D
     else if (ChannelId < 32)
     {
-        DioPort = GPIO_PORT_D_BASE;
+        DIOPort = GPIO_PORT_D_BASE;
         PinNumber = ChannelId - 24;
     }
 
     // Channel E
     else if (ChannelId < 40)
     {
-        DioPort = GPIO_PORT_E_BASE;
+        DIOPort = GPIO_PORT_E_BASE;
         PinNumber = ChannelId - 32;
     }
 
     // Channel F
     else if (ChannelId < 48)
     {
-        DioPort = GPIO_PORT_F_BASE;
+        DIOPort = GPIO_PORT_F_BASE;
         PinNumber = ChannelId - 40;
     }
 
@@ -157,18 +146,18 @@ Std_ReturnType Dio_WriteChannel(Dio_ChannelType ChannelId, Dio_LevelType Level)
     {
         return E_WRONG_CONFIG;
     }
-    GPIO_BIT_ACCESS(DioPort, GPIODATA_OFFSET, PinNumber) = Level;
+    GPIO_BIT_ACCESS(DIOPort, GPIODATA_OFFSET, PinNumber) = Level;
     return E_OK;
 }
-Dio_PortLevelType Dio_ReadPort(Dio_PortType PortId)
+DIO_PortLevelType DIO_ReadPort(DIO_PortType PortId)
 {
-    return ((Dio_PortLevelType) * (PortId + GPIODATA_OFFSET));
+    return ((DIO_PortLevelType)(*(IO_REG_PTR)(PortId + GPIODATA_OFFSET)));
 }
-void Dio_WritePort(Dio_PortType PortId, Dio_PortLevelType Level)
+void DIO_WritePort(DIO_PortType PortId, DIO_PortLevelType Level)
 {
-    *(PortId + GPIODATA_OFFSET) = Level;
+    (*(IO_REG_PTR)(PortId + GPIODATA_OFFSET)) = Level;
 }
-Dio_LevelType Dio_FlipChannel(Dio_ChannelType ChannelId)
+DIO_LevelType DIO_FlipChannel(DIO_ChannelType ChannelId)
 {
 }
 /**********************************************************************************************************************
