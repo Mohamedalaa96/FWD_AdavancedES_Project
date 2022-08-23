@@ -1,8 +1,8 @@
 /**********************************************************************************************************************
  *  FILE DESCRIPTION
  *  -----------------------------------------------------------------------------------------------------------------*/
-/**        \file  Port.c
- *        \brief
+/**        \file  LED.c
+ *        \brief    LED Blinking Hal Functions
  *
  *      \details
  *
@@ -12,11 +12,10 @@
 /**********************************************************************************************************************
  *  INCLUDES
  *********************************************************************************************************************/
-#include "Std_Types.h"
-#include "Bit_Math.h"
-#include "Port_Types.h"
-#include "GPIO_Registers.h"
 #include "Port.h"
+#include "Dio.h"
+
+#include "LED.h"
 
 /**********************************************************************************************************************
  *  LOCAL MACROS CONSTANT\FUNCTION
@@ -29,7 +28,6 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA
  *********************************************************************************************************************/
-
 /**********************************************************************************************************************
  *  LOCAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
@@ -43,7 +41,7 @@
  *********************************************************************************************************************/
 
 /******************************************************************************
- * \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)
+ * \Syntax          : LED_Init(void)
  * \Description     : Describe this service
  *
  * \Sync\Async      : Synchronous
@@ -53,56 +51,38 @@
  * \Return value:   : Std_ReturnType  E_OK
  *                                    E_NOT_OK
  *******************************************************************************/
-void Port_Init(const Port_ConfigType *ConfigPtr)
+void LED_Init(void)
 {
-    uint32 DioPort = 0;
-    uint8 PinNumber = 0;
-    /* Channel A */
-    if (ConfigPtr->PortPinNumber < 8)
-    {
-        DioPort = GPIO_PORT_A_BASE;
-    }
+    Port_ConfigType portConfig;
+    portConfig.PortPinDirection = PORT_PIN_OUTPUT;
+    portConfig.PortPinNumber = DIO_PIN_A0;
+    Port_Init(&portConfig);
+    DIO_WriteChannel(DIO_PIN_A0, DIO_PIN_LOW);
+}
 
-    /* Channel B */
-    else if (ConfigPtr->PortPinNumber < 16)
+/******************************************************************************
+ * \Syntax          : LED_BlinkRunner(uint8 LED_State)
+ * \Description     : Describe this service
+ *
+ * \Sync\Async      : Synchronous
+ * \Reentrancy      : Non Reentrant
+ * \Parameters (in) : parameterName   Parameter Description
+ * \Parameters (out): None
+ * \Return value:   : Std_ReturnType  E_OK
+ *                                    E_NOT_OK
+ *******************************************************************************/
+void LED_BlinkRunner(uint8 LED_State)
+{
+    if (LED_State == 0x00)
     {
-        DioPort = GPIO_PORT_B_BASE;
-        PinNumber = ConfigPtr->PortPinNumber - 8;
+        DIO_WriteChannel(DIO_PIN_A0, DIO_PIN_LOW);
     }
-
-    /* Channel C */
-    else if (ConfigPtr->PortPinNumber < 24)
+    else
     {
-        DioPort = GPIO_PORT_C_BASE;
-        PinNumber = ConfigPtr->PortPinNumber - 16;
+        DIO_WriteChannel(DIO_PIN_A0, DIO_PIN_HIGH);
     }
-
-    /*  Channel D */
-    else if (ConfigPtr->PortPinNumber < 32)
-    {
-        DioPort = GPIO_PORT_D_BASE;
-        PinNumber = ConfigPtr->PortPinNumber - 24;
-    }
-
-    // Channel E
-    else if (ConfigPtr->PortPinNumber < 40)
-    {
-        DioPort = GPIO_PORT_E_BASE;
-        PinNumber = ConfigPtr->PortPinNumber - 32;
-    }
-
-    // Channel F
-    else if (ConfigPtr->PortPinNumber < 48)
-    {
-        DioPort = GPIO_PORT_F_BASE;
-        PinNumber = ConfigPtr->PortPinNumber - 40;
-    }
-
-    GPIO_BIT_ACCESS(DioPort, GPIODIR_OFFSET, PinNumber) = ConfigPtr->PortPinDirection;
-    //     ConfigPtr->PortPinInternalAttach
-    //     ConfigPtr->
 }
 
 /**********************************************************************************************************************
- *  END OF FILE: FileName.c
+ *  END OF FILE: IntCtrl.c
  *********************************************************************************************************************/

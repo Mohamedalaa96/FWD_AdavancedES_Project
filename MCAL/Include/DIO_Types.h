@@ -2,7 +2,7 @@
 
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
- *         File:  DIO.h
+ *         File:  DIO_Types.h
  *       Module:  DIO
  *
  *  Description:  DIO Driver header file

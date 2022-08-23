@@ -3,6 +3,10 @@
         "std_types.h": "c",
         "dio.h": "c",
         "dio_types.h": "c",
-        "port_types.h": "c"
+        "port_types.h": "c",
+        "gpio_registers.h": "c",
+        "intctrl_types.h": "c",
+        "intctrl.h": "c",
+        "intctrl_cfg.h": "c"
     }
 }

@@ -2,23 +2,42 @@
 
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
- *         File:  Port_Types.h
- *       Module:  Port
+ *         File:  IntCtrl_Cfg.h
+ *       Module:  IntCtrl
  *
- *  Description:  Port Driver header file
+ *  Description:  Interrupt Control Driver Build-time configurations
  *
  *********************************************************************************************************************/
-#ifndef PORT_TYPES_H
-#define PORT_TYPES_H
+#ifndef INTCTRL_CFG_H
+#define INTCTRL_CFG_H
 
 /**********************************************************************************************************************
  * INCLUDES
  *********************************************************************************************************************/
-#include "Std_Types.h"
 
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
+// Group and sub selection
+#define INTCTRL_8_GRROUP_1_SUB 1
+#define INTCTRL_4_GRROUP_2_SUB 2
+#define INTCTRL_2_GRROUP_4_SUB 3
+#define INTCTRL_1_GRROUP_8_SUB 4
+
+#define INTCTRL_GROUPING_TYPE INTCTRL_8_GRROUP_1_SUB
+// Interrupts activate and deactivate
+
+// Sysytem interrupts and faults 1 enabled, 0 disabled
+#define INTCTRL_SYSTEM_INTERRUPTS_ENABLE 1
+
+// Range -3 to 71 *not sure
+#define INTCTRL_MIN_PRIORITY_EXCEPTION_PROCESSING 1
+
+// Except NMI 1 DISABLE, 0 ENABLE
+#define INTCTRL_DISABLE_ALL_EXCEPTIONS 0
+
+//  1 DISABLE, 0 ENABLE
+#define INTCTRL_DISABLE_ALL_INTERRUPTS 0
 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
@@ -27,23 +46,6 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
-typedef uint8 Port_PinType;               //
-typedef uint8 Port_PinLevelType;          // Inital Value
-typedef uint8 Port_DirectionType;         // input output
-typedef uint8 Port_PinModeType;           // any AF or DIO
-typedef uint8 Port_PinInternalAttachType; // PU- PD- OD
-typedef uint8 Port_PinOutputCurrentType;  // 2mA,4mA,8mA
-
-typedef struct
-{
-    Port_PinType PortPinNumber;                       // pin Number
-    Port_PinModeType PortPinMode;                     // 0 or 1
-    Port_PinLevelType PortPinLevel;                   // initial value
-    Port_DirectionType PortPinDirection;              // Ouput or input
-    Port_PinInternalAttachType PortPinInternalAttach; // pull up or down
-    Port_PinOutputCurrentType PortPinOutputCurrent;   // 0-255
-
-} Port_ConfigType; // 0-255
 
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES
@@ -53,8 +55,8 @@ typedef struct
  *  GLOBAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
 
-#endif /* DIO_TYPES_H */
+#endif /* INTCTRL_CFG_H */
 
 /**********************************************************************************************************************
- *  END OF FILE: DIO_Types.h
+ *  END OF FILE: IntCtrl_Cfg.h
  *********************************************************************************************************************/

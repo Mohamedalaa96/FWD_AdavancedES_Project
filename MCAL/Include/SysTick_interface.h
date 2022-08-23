@@ -10,6 +10,8 @@
 #ifndef SYS_FREQ
 #define SYS_FQ 8000000 /// Defualt 8 MHz
 #endif
+#define TICK_TO_SEC 32000000
+
 
 #define mS_TO_TICK(x) ((x / 1000) * (SYS_FQ / 8)) /// AHB / 8 by defualt
 #define uS_TO_TICK(x) ((x) * (SYS_FQ / 8))        /// AHB / 8 by defualt
